@@ -28,3 +28,15 @@ jobs:
 
       - name: Run PHPUnit Tests
         run: vendor/bin/phpunit
+  label:
+    needs: test
+    runs-on: ubuntu-latest
+    if: success()
+
+    steps:
+      - name: Add label to PR
+        uses: actions-ecosystem/action-add-labels@v1
+        with:
+          labels: "tests passed"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
