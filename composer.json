@@ -4,12 +4,15 @@
     "license": "MIT",
     "keywords": [
         "laravel",
-        "paynow"
+        "money"
     ],
     "autoload": {
         "psr-4": {
-            "xGrz\\PayNow\\": "src/"
-        }
+            "xGrz\\Money\\": "src/"
+        },
+        "files": [
+            "src/global-helper.php"
+        ]
     },
     "extra": {
         "laravel": {
