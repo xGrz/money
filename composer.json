@@ -1,0 +1,39 @@
+{
+    "name": "xgrz/money",
+    "description": "Money helper for Laravel",
+    "license": "MIT",
+    "keywords": [
+        "laravel",
+        "paynow"
+    ],
+    "autoload": {
+        "psr-4": {
+            "xGrz\\PayNow\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "xGrz\\Money\\MoneyServiceProvider"
+            ]
+        }
+    },
+    "authors": [
+        {
+            "name": "Grzegorz Byśkiniewicz",
+            "email": "grzesiek.byskiniewicz@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "require": {
+        "php": "^8.1",
+        "laravel/framework": "^10|^11",
+        "nyholm/psr7": "^1.8"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    }
+}
