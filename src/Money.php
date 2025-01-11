@@ -3,6 +3,7 @@
 namespace xGrz\Money;
 
 use Illuminate\Support\Number;
+use xGrz\Money\Exceptions\MoneyValidationException;
 
 class Money
 {
@@ -44,7 +45,7 @@ class Money
     public function thousandsSeparator(string $separator = ' '): static
     {
         if ($separator === '@') throw new \ParseError('[@] cannot be a thousands separator.');
-        if ($separator === ' ') $separator = ' ';
+        if ($separator === ' ') $separator = self::getSpacer();
 
         $this->thousandsSeparator = $separator;
         return $this;
@@ -70,7 +71,7 @@ class Money
 
     public function format(): ?string
     {
-        if (!$this->shouldDisplayZero && $this->amount ==0) return null;
+        if (!$this->shouldDisplayZero && $this->amount == 0) return null;
 
         return str(Number::format($this->amount / (10 ** $this->precision), $this->precision))
             ->replace('.', '@')
@@ -79,13 +80,13 @@ class Money
             ->when(
                 $this->currency && $this->currencyBeforeAmount,
                 fn($amount) => str($amount)
-                    ->when($this->currencySeparation, fn($amount) => str($amount)->prepend(' '))
+                    ->when($this->currencySeparation, fn($amount) => str($amount)->prepend(self::getSpacer()))
                     ->prepend($this->currency)
             )
             ->when(
                 $this->currency && !$this->currencyBeforeAmount,
                 fn($amount) => str($amount)
-                    ->when($this->currencySeparation, fn($amount) => str($amount)->append(' '))
+                    ->when($this->currencySeparation, fn($amount) => str($amount)->append(self::getSpacer()))
                     ->append($this->currency)
             )
             ->toString();
@@ -128,6 +129,11 @@ class Money
         } catch (MoneyValidationException $e) {
         }
         return false;
+    }
+
+    public static function getSpacer(): string
+    {
+        return ' ';
     }
 
     /**

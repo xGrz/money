@@ -4,8 +4,8 @@ namespace xGrz\Tests;
 
 
 use Tests\TestCase;
+use xGrz\Money\Exceptions\MoneyValidationException;
 use xGrz\Money\Money;
-use xGrz\Money\MoneyValidationException;
 
 class MoneyTest extends TestCase
 {
@@ -37,9 +37,10 @@ class MoneyTest extends TestCase
     public function test_can_change_default_thousands_separator()
     {
         $money = money(1123300.3);
+        $spacer = Money::getSpacer();
 
         $this->assertEquals('1123300,30', $money->format());
-        $this->assertEquals('1 123 300,30', $money->thousandsSeparator(' '));
+        $this->assertEquals("1{$spacer}123{$spacer}300,30", $money->thousandsSeparator(' ')->format());
     }
 
     public function test_return_zero_values_in_default_configuration()
@@ -59,15 +60,17 @@ class MoneyTest extends TestCase
     public function test_add_currency_before_value()
     {
         $money = money(1)->currency('PLN', true);
+        $spacer = Money::getSpacer();
 
-        $this->assertEquals('PLN 1,00', $money->format());
+        $this->assertEquals("PLN{$spacer}1,00", $money->format());
     }
 
     public function test_add_currency_after_value()
     {
         $money = money(1)->currency('PLN', false);
+        $spacer = Money::getSpacer();
 
-        $this->assertEquals('1,00 PLN', $money->format());
+        $this->assertEquals("1,00{$spacer}PLN", $money->format());
     }
 
     public function test_add_currency_before_value_without_space()
