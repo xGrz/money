@@ -4,7 +4,6 @@ namespace xGrz\Money;
 
 use Illuminate\Support\Number;
 
-
 class Money
 {
     private int|float $amount = 0;

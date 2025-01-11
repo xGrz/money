@@ -1,8 +1,9 @@
 <?php
 
-namespace Tests;
+namespace xGrz\Tests;
 
 
+use Tests\TestCase;
 use xGrz\Money\Money;
 use xGrz\Money\MoneyValidationException;
 
