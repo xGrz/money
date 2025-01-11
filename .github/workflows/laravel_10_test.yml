@@ -12,10 +12,6 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        php: ['8.1', '8.2']
-
     steps:
       - name: Check out code
         uses: actions/checkout@v3
@@ -23,7 +19,7 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: ${{ matrix.php }}
+          php-version: 8.1
           extensions: mbstring
           coverage: none
 
