@@ -3,7 +3,7 @@
 namespace xGrz\Tests;
 
 
-use Tests\TestCase;
+use PHPUnit\Framework\TestCase;
 use xGrz\Money\Exceptions\MoneyValidationException;
 use xGrz\Money\Money;
 
