@@ -136,11 +136,24 @@ class Money
         return ' ';
     }
 
+    public function toDatabase(): int
+    {
+        return $this->amount;
+    }
+
     /**
      * @throws MoneyValidationException
      */
     public static function from(int|float|string|null $amount, bool $shouldDisplayZero = true, int $precision = 2): static
     {
         return (new self($amount, $precision))->shouldDisplayZero($shouldDisplayZero);
+    }
+
+    /**
+     * @throws MoneyValidationException
+     */
+    public static function fromDatabase(int $amount, bool $shouldDisplayZero = true, int $precision = 2): static
+    {
+        return (new self($amount / (10 ** $precision), $precision))->shouldDisplayZero($shouldDisplayZero);
     }
 }
