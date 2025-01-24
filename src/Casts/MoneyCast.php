@@ -15,7 +15,7 @@ class MoneyCast implements CastsAttributes
 
     public function get(?Model $model, string $key, mixed $value, array $attributes): mixed
     {
-        return Money::fromDatabase($value, precision: $this->precision);
+        return Money::fromDatabase($value, precision: $this->precision)->toNumber();
     }
 
     public function set(?Model $model, string $key, mixed $value, array $attributes): int
