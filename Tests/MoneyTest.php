@@ -180,7 +180,7 @@ class MoneyTest extends TestCase
     public function test_model_cast_money_get_value_with_default_precision()
     {
         $cast = new MoneyCast(2);
-        $this->assertEquals('999,99', $cast->get(null, 'key', 99999, []));
+        $this->assertEquals('999.99', $cast->get(null, 'key', 99999, []));
 
     }
 
@@ -193,7 +193,7 @@ class MoneyTest extends TestCase
     public function test_model_cast_money_get_value_with_custom_precision()
     {
         $cast = new MoneyCast(3);
-        $this->assertEquals('99,999', $cast->get(null, 'key', 99999, []));
+        $this->assertEquals('99.999', $cast->get(null, 'key', 99999, []));
 
     }
 
