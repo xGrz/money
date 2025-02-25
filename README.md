@@ -4,7 +4,7 @@
 # Money formatter/calculator for Laravel
 
 Money is small package for money format for Laravel.
-It works with Laravel 10.x and Laravel 11.x.
+It works with Laravel 10, 11 and 12.
 
 ## Installation
 
