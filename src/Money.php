@@ -110,6 +110,25 @@ class Money
         return $this;
     }
 
+    public function add(int|float $value): static
+    {
+        $this->amount += round($value * (10 ** $this->precision));
+        return $this;
+    }
+
+    public function minus(int|float $value): static
+    {
+        $this->amount -= round($value * (10 ** $this->precision));
+        return $this;
+    }
+
+    public function divide(int|float $by): static
+    {
+        if ($by == 0) return $this;
+        $this->amount = round($this->amount / $by, $this->precision);
+        return $this;
+    }
+
     public function subtractPercent(int|float $percent): static
     {
         $this->amount = ($this->amount / (100 + $percent)) * 100;

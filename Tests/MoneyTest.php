@@ -203,5 +203,23 @@ class MoneyTest extends TestCase
         $this->assertEquals(999990, $cast->set(null, 'key', '999,99', []));
     }
 
+    public function test_add_value()
+    {
+        $money = money("36,59")->add(20.02)->toNumber();
+        $this->assertEquals(56.61, $money);
+    }
+
+    public function test_subtract_value()
+    {
+        $money = money("36,59")->minus(20.02)->toNumber();
+        $this->assertEquals(16.57, $money);
+    }
+
+    public function test_divide_by_3()
+    {
+        $money = money(100)->divide(3)->toNumber();
+        $this->assertEquals(33.33, $money);
+    }
+
 
 }
