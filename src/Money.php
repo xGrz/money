@@ -14,14 +14,16 @@ class Money
     private ?string $currency = null;
     private bool $currencyBeforeAmount = false;
     private bool $currencySeparation = true;
+    private readonly int $precision;
 
 
     /**
      * @throws MoneyValidationException
      */
-    private function __construct(int|float|string|null $amount, private int $precision = 2)
+    private function __construct(int|float|string|null $amount, int $precision = 2)
     {
         if (empty($amount)) $amount = 0;
+        $this->precision = $precision;
         $amount = is_numeric($amount) ? $amount : $this->toNumeric($amount);
         if (!is_numeric($amount)) throw new MoneyValidationException('Amount is not a number');
         $this->amount = (int)round($amount * (10 ** $this->precision));
