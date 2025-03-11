@@ -221,5 +221,24 @@ class MoneyTest extends TestCase
         $this->assertEquals(33.33, $money);
     }
 
+    public function test_divide_by_float_number()
+    {
+        $money = money(100, precision: 0)->divide(3.33)->toNumber();
+        $this->assertEquals(30, $money);
+    }
+
+    public function test_add_money_object()
+    {
+        $amountToAdd = money(10);
+        $money = money("36,59")->add($amountToAdd)->toNumber();
+        $this->assertEquals(46.59, $money);
+    }
+
+    public function test_add_subtract_object()
+    {
+        $amountToAdd = money(10);
+        $money = money("36,59")->minus($amountToAdd)->toNumber();
+        $this->assertEquals(26.59, $money);
+    }
 
 }

@@ -110,15 +110,21 @@ class Money
         return $this;
     }
 
-    public function add(int|float $value): static
+    protected function evaluate(int|float|string|Money $value): int
     {
-        $this->amount += round($value * (10 ** $this->precision));
+        if ($value instanceof Money) $value = $value->toNumber();
+        return round($value * (10 ** $this->precision), 0);
+    }
+
+    public function add(int|float|Money $value): static
+    {
+        $this->amount += $this->evaluate($value);
         return $this;
     }
 
-    public function minus(int|float $value): static
+    public function minus(int|float|Money $value): static
     {
-        $this->amount -= round($value * (10 ** $this->precision));
+        $this->amount -= $this->evaluate($value);
         return $this;
     }
 
