@@ -25,7 +25,7 @@ class Money
         if (empty($amount)) $amount = 0;
         $this->precision = $precision;
         $amount = is_numeric($amount) ? $amount : $this->toNumeric($amount);
-        if (!is_numeric($amount)) throw new MoneyValidationException('Amount [' . $amount . ']is not a number');
+        if (!is_numeric($amount)) throw new MoneyValidationException('Amount [' . $amount . '] is not a number');
         $this->amount = (int)round($amount * (10 ** $this->precision));
     }
 

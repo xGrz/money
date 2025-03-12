@@ -127,7 +127,7 @@ class MoneyTest extends TestCase
     public function test_incorrect_amount_throws_exception()
     {
         $this->expectException(MoneyValidationException::class);
-        $this->expectExceptionMessage('Amount is not a number');
+        $this->expectExceptionMessage('Amount [PLN200] is not a number');
         money('PLN 200');
     }
 
