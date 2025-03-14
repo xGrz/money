@@ -183,4 +183,15 @@ class Money
     {
         return (new self($amount / (10 ** $precision), $precision))->shouldDisplayZero($shouldDisplayZero);
     }
+
+    public function isNegative(): bool
+    {
+        return $this->amount < 0;
+    }
+
+    public function isNegativeOrZero(): bool
+    {
+        return $this->amount <= 0;
+    }
+
 }
