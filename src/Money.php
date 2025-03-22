@@ -179,8 +179,11 @@ class Money
     /**
      * @throws MoneyValidationException
      */
-    public static function fromDatabase(int $amount, bool $shouldDisplayZero = true, int $precision = 2): static
+    public static function fromDatabase(?int $amount, bool $shouldDisplayZero = true, int $precision = 2): static
     {
+        if (is_null($amount)) {
+            $amount = 0;
+        }
         return (new self($amount / (10 ** $precision), $precision))->shouldDisplayZero($shouldDisplayZero);
     }
 

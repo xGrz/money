@@ -164,6 +164,13 @@ class MoneyTest extends TestCase
         $this->assertEquals('300,30', $money);
     }
 
+    public function test_conver_from_safe_database_null()
+    {
+        $money = Money::fromDatabase(null)->format();
+        $this->assertEquals('0,00', $money);
+
+    }
+
     public function test_convert_to_safe_database_integer_with_custom_precision()
     {
         $money = money('300,3011', precision: 3)->toDatabase();
