@@ -20,12 +20,17 @@ class MoneyCast implements CastsAttributes
 
     public function set(?Model $model, string $key, mixed $value, array $attributes): ?int
     {
-        if ($value instanceof Money) return $value->toDatabase();
-        if (is_null($value)) {
-            if ($this->nullable) return null;
-            $value = 0;
-        }
+        $dbValue = ($value instanceof Money)
+            ? $value->toDatabase()
+            : Money::from($value, precision: $this->precision)->toDatabase();
 
-        return Money::from($value, precision: $this->precision)->toDatabase();
+        return $this->formatDatabaseOutput($dbValue);
     }
+
+    public function formatDatabaseOutput(int $value): ?int
+    {
+        if ($value !== 0) return $value;
+        return $this->nullable ? null : 0;
+    }
+
 }
