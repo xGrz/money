@@ -197,6 +197,18 @@ class MoneyTest extends TestCase
         $this->assertEquals(99999, $cast->set(null, 'key', '999,99', []));
     }
 
+    public function test_model_cast_money_set_null_when_not_nullable()
+    {
+        $cast = new MoneyCast(2, false);
+        $this->assertEquals(0, $cast->set(null, 'key', null, []));
+    }
+
+    public function test_model_cast_money_set_null_when_is_nullable()
+    {
+        $cast = new MoneyCast(2, true);
+        $this->assertNull($cast->set(null, 'key', null, []));
+    }
+
     public function test_model_cast_money_get_value_with_custom_precision()
     {
         $cast = new MoneyCast(3);

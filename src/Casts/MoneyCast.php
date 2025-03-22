@@ -9,7 +9,7 @@ use xGrz\Money\Money;
 class MoneyCast implements CastsAttributes
 {
 
-    public function __construct(public int $precision = 2)
+    public function __construct(public int $precision = 2, public bool $nullable = false)
     {
     }
 
@@ -18,10 +18,14 @@ class MoneyCast implements CastsAttributes
         return Money::fromDatabase($value, precision: $this->precision)->toNumber();
     }
 
-    public function set(?Model $model, string $key, mixed $value, array $attributes): int
+    public function set(?Model $model, string $key, mixed $value, array $attributes): ?int
     {
-        return ($value instanceof Money)
-            ? $value->toDatabase()
-            : Money::from($value, precision: $this->precision)->toDatabase();
+        if ($value instanceof Money) return $value->toDatabase();
+        if (is_null($value)) {
+            if ($this->nullable) return null;
+            $value = 0;
+        }
+
+        return Money::from($value, precision: $this->precision)->toDatabase();
     }
 }
