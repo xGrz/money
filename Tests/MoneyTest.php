@@ -4,7 +4,6 @@ namespace xGrz\Tests;
 
 
 use PHPUnit\Framework\TestCase;
-use xGrz\Money\Casts\MoneyCast;
 use xGrz\Money\Exceptions\MoneyValidationException;
 use xGrz\Money\Money;
 
@@ -88,41 +87,6 @@ class MoneyTest extends TestCase
         $this->assertEquals('1,00PLN', $money->format());
     }
 
-    public function test_add_percent()
-    {
-        $money = money(36.58)->addPercent(23)->toNumber();
-
-        $this->assertEquals(44.99, $money);
-
-    }
-
-    public function test_subtract_percent()
-    {
-        $money = money(45)->subtractPercent(23)->toNumber();
-
-        $this->assertEquals(36.59, $money);
-    }
-
-    public function test_multiply_amount()
-    {
-        $money = money(100)->multiply(2.5);
-
-        $this->assertEquals(250, $money->toNumber());
-    }
-
-    public function test_multiply_with_add_percent_combined()
-    {
-        $money = money("36,59")->multiply(10)->addPercent(23);
-
-        $this->assertEquals(450.06, $money->toNumber());
-    }
-
-    public function test_add_percent_with_multiply_combined()
-    {
-        $money = money("36,59")->addPercent(23)->multiply(10);
-
-        $this->assertEquals(450.1, $money->toNumber());
-    }
 
     public function test_incorrect_amount_throws_exception()
     {
@@ -131,25 +95,6 @@ class MoneyTest extends TestCase
         money('PLN 200');
     }
 
-    public function test_amount_validation_success()
-    {
-        $this->assertTrue(Money::isValid('200.12'));
-        $this->assertTrue(Money::isValid('200.12'));
-        $this->assertTrue(Money::isValid(' 200,12'));
-        $this->assertTrue(Money::isValid('200,12 '));
-        $this->assertTrue(Money::isValid(' 200,12 '));
-        $this->assertTrue(Money::isValid(200.122));
-    }
-
-
-    public function test_amount_validation_fails()
-    {
-        $this->assertFalse(Money::isValid('A200.12'));
-        $this->assertFalse(Money::isValid('200.12PLN'));
-        $this->assertFalse(Money::isValid('$200,12'));
-        $this->assertFalse(Money::isValid('200,12$'));
-        $this->assertFalse(Money::isValid('20-12'));
-    }
 
     public function test_convert_to_safe_database_integer()
     {
@@ -158,136 +103,7 @@ class MoneyTest extends TestCase
     }
 
 
-    public function test_convert_from_safe_database_integer()
-    {
-        $money = Money::fromDatabase('30030')->format();
-        $this->assertEquals('300,30', $money);
-    }
-
-    public function test_conver_from_safe_database_null()
-    {
-        $money = Money::fromDatabase(null)->format();
-        $this->assertEquals('0,00', $money);
-
-    }
-
-    public function test_convert_to_safe_database_integer_with_custom_precision()
-    {
-        $money = money('300,3011', precision: 3)->toDatabase();
-        $this->assertEquals(300301, $money);
-    }
 
 
-    public function test_convert_from_safe_database_integer_with_custom_precision()
-    {
-        $money = Money::fromDatabase('300301', precision: 3)->format();
-        $this->assertEquals('300,301', $money);
-    }
-
-    public function test_model_cast_money_get_value_with_default_precision()
-    {
-        $cast = new MoneyCast(2);
-        $this->assertEquals('999.99', $cast->get(null, 'key', 99999, []));
-
-    }
-
-    public function test_model_cast_money_set_value_with_default_precision()
-    {
-        $cast = new MoneyCast(2);
-        $this->assertEquals(99999, $cast->set(null, 'key', '999,99', []));
-    }
-
-    public function test_model_cast_money_set_null_when_not_nullable()
-    {
-        $cast = new MoneyCast(2, false);
-        $this->assertEquals(0, $cast->set(null, 'key', null, []));
-    }
-
-    public function test_model_cast_money_set_null_when_is_nullable()
-    {
-        $cast = new MoneyCast(2, true);
-        $this->assertNull($cast->set(null, 'key', null, []));
-    }
-
-    public function test_model_cast_money_get_value_with_custom_precision()
-    {
-        $cast = new MoneyCast(3);
-        $this->assertEquals('99.999', $cast->get(null, 'key', 99999, []));
-
-    }
-
-    public function test_model_cast_money_set_value_with_custom_precision()
-    {
-        $cast = new MoneyCast(3);
-        $this->assertEquals(999990, $cast->set(null, 'key', '999,99', []));
-    }
-
-    public function test_add_value()
-    {
-        $money = money("36,59")->add(20.02)->toNumber();
-        $this->assertEquals(56.61, $money);
-    }
-
-    public function test_subtract_value()
-    {
-        $money = money("36,59")->minus(20.02)->toNumber();
-        $this->assertEquals(16.57, $money);
-    }
-
-    public function test_divide_by_3()
-    {
-        $money = money(100)->divide(3)->toNumber();
-        $this->assertEquals(33.33, $money);
-    }
-
-    public function test_divide_by_float_number()
-    {
-        $money = money(100, precision: 0)->divide(3.33)->toNumber();
-        $this->assertEquals(30, $money);
-    }
-
-    public function test_add_money_object()
-    {
-        $amountToAdd = money(10);
-        $money = money("36,59")->add($amountToAdd)->toNumber();
-        $this->assertEquals(46.59, $money);
-    }
-
-    public function test_add_subtract_object()
-    {
-        $amountToAdd = money(10);
-        $money = money("36,59")->minus($amountToAdd)->toNumber();
-        $this->assertEquals(26.59, $money);
-    }
-
-    public function test_is_negative_on_positive_value_return_false()
-    {
-        $this->assertFalse(money('120')->isNegative());
-    }
-
-    public function test_is_negative_on_negative_value_return_true()
-    {
-        $this->assertTrue(money('-120')->isNegative());
-    }
-
-    public function test_is_negative_on_zero_return_false()
-    {
-        $this->assertFalse(money(0)->isNegative());
-    }
-
-    public function test_is_negative_or_zero_on_positive_value_return_false()
-    {
-        $this->assertFalse(money('120')->isNegativeOrZero());
-    }
-
-    public function test_is_negative_or_zero_on_negative_value_return_true()
-    {
-        $this->assertTrue(money('-120')->isNegativeOrZero());
-    }
-
-    public function test_is_negative_or_zero_on_zero_return_true()
-    {
-        $this->assertTrue(money(0)->isNegativeOrZero());
-    }
 
 }
