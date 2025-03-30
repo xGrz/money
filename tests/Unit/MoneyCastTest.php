@@ -11,7 +11,7 @@ class MoneyCastTest extends TestCase
 
     public function test_convert_from_database_integer_value()
     {
-        $money = Money::fromDatabase('30030')->format();
+        $money = Money::fromDatabase(30030)->format();
         $this->assertEquals('300,30', $money);
     }
 
@@ -30,7 +30,7 @@ class MoneyCastTest extends TestCase
 
     public function test_convert_from_database_with_custom_precision()
     {
-        $money = Money::fromDatabase('300301', precision: 3)->format();
+        $money = Money::fromDatabase(300301, precision: 3)->format();
         $this->assertEquals('300,301', $money);
     }
 
