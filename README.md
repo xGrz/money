@@ -1,11 +1,9 @@
-[![Laravel 10.x](https://github.com/xGrz/money/actions/workflows/laravel_10_test.yml/badge.svg)](https://github.com/xGrz/money/actions/workflows/laravel_10_test.yml)
-[![Laravel 11.x](https://github.com/xGrz/money/actions/workflows/laravel_11_test.yml/badge.svg)](https://github.com/xGrz/money/actions/workflows/laravel_11_test.yml)
-[![Laravel 12.x](https://github.com/xGrz/money/actions/workflows/laravel_12_test.yml/badge.svg)](https://github.com/xGrz/money/actions/workflows/laravel_12_test.yml)
+[![Tests](https://github.com/xGrz/money/actions/workflows/tests.yaml/badge.svg)](https://github.com/xGrz/money/actions/workflows/tests.yaml)
 
 # Money formatter/calculator for Laravel
 
 Money is small package for money format for Laravel.
-It works with Laravel 10, 11 and 12.
+It works with Laravel 10, 11 and 12 (PHP 8.1-8.4)
 
 ## Installation
 
