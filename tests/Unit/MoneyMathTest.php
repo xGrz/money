@@ -1,6 +1,8 @@
 <?php
 
 
+namespace XGrz\Money\Tests\Unit;
+
 use PHPUnit\Framework\TestCase;
 
 class MoneyMathTest extends TestCase
@@ -80,7 +82,6 @@ class MoneyMathTest extends TestCase
         $money = money("36,59")->minus($amountToAdd)->toNumber();
         $this->assertEquals(26.59, $money);
     }
-
 
 
 }

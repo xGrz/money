@@ -1,6 +1,6 @@
 <?php
 
-namespace XGrz\Tests;
+namespace XGrz\Money\Tests\Unit;
 
 
 use PHPUnit\Framework\TestCase;

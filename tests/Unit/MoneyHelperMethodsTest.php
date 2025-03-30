@@ -1,6 +1,8 @@
 <?php
 
 
+namespace XGrz\Money\Tests\Unit;
+
 use PHPUnit\Framework\TestCase;
 
 class MoneyHelperMethodsTest extends TestCase

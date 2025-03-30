@@ -1,5 +1,6 @@
 <?php
 
+namespace XGrz\Money\Tests\Unit;
 
 use PHPUnit\Framework\TestCase;
 use XGrz\Money\Casts\MoneyCast;
