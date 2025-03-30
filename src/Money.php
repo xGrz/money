@@ -115,7 +115,7 @@ class Money
     protected function evaluate(int|float|string|Money $value): int
     {
         if ($value instanceof Money) $value = $value->toNumber();
-        return round($value * (10 ** $this->precision), 0);
+        return (int) round($value * (10 ** $this->precision), 0);
     }
 
     public function add(int|float|Money $value): static
@@ -171,7 +171,7 @@ class Money
     /**
      * @throws MoneyValidationException
      */
-    public static function from(int|float|string|null $amount, bool $shouldDisplayZero = true, int $precision = 2): static
+    public static function from(int|float|string|null $amount, bool $shouldDisplayZero = true, int $precision = 2): Money
     {
         return (new self($amount, $precision))->shouldDisplayZero($shouldDisplayZero);
     }
@@ -179,7 +179,7 @@ class Money
     /**
      * @throws MoneyValidationException
      */
-    public static function fromDatabase(?int $amount, bool $shouldDisplayZero = true, int $precision = 2): static
+    public static function fromDatabase(?int $amount, bool $shouldDisplayZero = true, int $precision = 2): Money
     {
         if (is_null($amount)) {
             $amount = 0;
