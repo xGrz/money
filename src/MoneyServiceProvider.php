@@ -1,10 +1,10 @@
 <?php
 
-namespace xGrz\Money;
+namespace XGrz\Money;
 
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
-use xGrz\PayNow\Livewire\PaymentsTable;
+use XGrz\PayNow\Livewire\PaymentsTable;
 
 class MoneyServiceProvider extends ServiceProvider
 {

@@ -9,16 +9,21 @@
   ],
   "autoload": {
     "psr-4": {
-      "xGrz\\Money\\": "src/"
+      "XGrz\\Money\\": "src/"
     },
     "files": [
       "src/global-helper.php"
     ]
   },
+  "autoload-dev": {
+    "psr-4": {
+      "XGrz\\Settings\\Tests\\": "tests/"
+    }
+  },
   "extra": {
     "laravel": {
       "providers": [
-        "xGrz\\Money\\MoneyServiceProvider"
+        "XGrz\\Money\\MoneyServiceProvider"
       ]
     }
   },

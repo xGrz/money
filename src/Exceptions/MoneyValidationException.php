@@ -1,6 +1,6 @@
 <?php
 
-namespace xGrz\Money\Exceptions;
+namespace XGrz\Money\Exceptions;
 
 use Exception;
 

@@ -1,10 +1,10 @@
 <?php
 
-namespace xGrz\Money\Casts;
+namespace XGrz\Money\Casts;
 
 use Illuminate\Contracts\Database\Eloquent\CastsAttributes;
 use Illuminate\Database\Eloquent\Model;
-use xGrz\Money\Money;
+use XGrz\Money\Money;
 
 class MoneyCast implements CastsAttributes
 {

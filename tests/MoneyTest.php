@@ -1,11 +1,11 @@
 <?php
 
-namespace xGrz\Tests;
+namespace XGrz\Tests;
 
 
 use PHPUnit\Framework\TestCase;
-use xGrz\Money\Exceptions\MoneyValidationException;
-use xGrz\Money\Money;
+use XGrz\Money\Exceptions\MoneyValidationException;
+use XGrz\Money\Money;
 
 class MoneyTest extends TestCase
 {

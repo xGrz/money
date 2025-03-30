@@ -1,9 +1,9 @@
 <?php
 
-namespace xGrz\Money;
+namespace XGrz\Money;
 
 use Illuminate\Support\Number;
-use xGrz\Money\Exceptions\MoneyValidationException;
+use XGrz\Money\Exceptions\MoneyValidationException;
 
 class Money
 {

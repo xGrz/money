@@ -1,7 +1,7 @@
 <?php
 
-use xGrz\Money\Exceptions\MoneyValidationException;
-use xGrz\Money\Money;
+use XGrz\Money\Exceptions\MoneyValidationException;
+use XGrz\Money\Money;
 
 
 if (!function_exists('money')) {

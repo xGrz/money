@@ -2,8 +2,8 @@
 
 
 use PHPUnit\Framework\TestCase;
-use xGrz\Money\Casts\MoneyCast;
-use xGrz\Money\Money;
+use XGrz\Money\Casts\MoneyCast;
+use XGrz\Money\Money;
 
 class MoneyCastTest extends TestCase
 {

@@ -2,7 +2,7 @@
 
 
 use PHPUnit\Framework\TestCase;
-use xGrz\Money\Money;
+use XGrz\Money\Money;
 
 class MoneyValidationTest extends TestCase
 {

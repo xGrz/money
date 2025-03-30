@@ -16,7 +16,7 @@ composer require xgrz/money
 ## Example usage
 
 ```
-use xGrz\Money\Money;
+use XGrz\Money\Money;
 
 try {
     $money = Money::from(1234.567, precision: 2)
