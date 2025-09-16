@@ -143,6 +143,13 @@ class Money
         return $this;
     }
 
+    public function discount(int|float $percent): static
+    {
+        $discountValue = (int) ($this->amount * ($percent / 100));
+        $this->amount = $this->amount - $discountValue;
+        return $this;
+    }
+
     public function __toString(): string
     {
         return $this->format() ?? '';

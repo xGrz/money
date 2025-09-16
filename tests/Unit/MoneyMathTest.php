@@ -36,6 +36,13 @@ class MoneyMathTest extends TestCase
         $this->assertEquals(36.59, $money);
     }
 
+    public function test_discount_percent()
+    {
+        $money = money(85)->discount(25)->toNumber();
+
+        $this->assertEquals(63.75, $money);
+    }
+
     public function test_multiply_amount()
     {
         $money = money(100)->multiply(2.5);
