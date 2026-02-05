@@ -102,6 +102,11 @@ class MoneyTest extends TestCase
         $this->assertEquals(30030, $money);
     }
 
+    public function test_input_with_comma_and_without_decimals()
+    {
+        $money = money('300,')->toNumber();
+        $this->assertEquals(300, $money);
+    }
 
 
 

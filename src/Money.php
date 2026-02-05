@@ -11,7 +11,7 @@ class Money
     private bool $shouldDisplayZero = true;
     private string $decimalSeparator = ',';
     private string $thousandsSeparator = '';
-    private ?string $currency = null;
+    private ?string $currency = NULL;
     private bool $currencyBeforeAmount = false;
     private bool $currencySeparation = true;
     private readonly int $precision;
@@ -25,7 +25,7 @@ class Money
         if (empty($amount)) $amount = 0;
         $this->precision = $precision;
         $amount = is_numeric($amount) ? str_replace(self::getSpacer(), '', $amount) : $this->toNumeric($amount);
-        if (!is_numeric($amount)) throw new MoneyValidationException('Amount [' . $amount . '] is not a number');
+        if (! is_numeric($amount)) throw new MoneyValidationException('Amount [' . $amount . '] is not a number');
         $this->amount = (int)round($amount * (10 ** $this->precision));
     }
 
@@ -63,7 +63,10 @@ class Money
 
     public function toNumber(): float|int
     {
-        return round($this->amount / (10 ** $this->precision), $this->precision);
+        $value = round($this->amount / (10 ** $this->precision), $this->precision);
+        return ($value == (int)$value)
+            ? (int)$value
+            : $value;
     }
 
     public function getAmount(): int
@@ -73,7 +76,7 @@ class Money
 
     public function format(): ?string
     {
-        if (!$this->shouldDisplayZero && $this->amount == 0) return null;
+        if (! $this->shouldDisplayZero && $this->amount == 0) return NULL;
 
         return str(Number::format($this->amount / (10 ** $this->precision), $this->precision))
             ->replace('.', '@')
@@ -86,7 +89,7 @@ class Money
                     ->prepend($this->currency)
             )
             ->when(
-                $this->currency && !$this->currencyBeforeAmount,
+                $this->currency && ! $this->currencyBeforeAmount,
                 fn($amount) => str($amount)
                     ->when($this->currencySeparation, fn($amount) => str($amount)->append(self::getSpacer()))
                     ->append($this->currency)
@@ -115,7 +118,7 @@ class Money
     protected function evaluate(int|float|string|Money $value): int
     {
         if ($value instanceof Money) $value = $value->toNumber();
-        return (int) round($value * (10 ** $this->precision), 0);
+        return (int)round($value * (10 ** $this->precision), 0);
     }
 
     public function add(int|float|Money $value): static
@@ -145,7 +148,7 @@ class Money
 
     public function discount(int|float $percent): static
     {
-        $discountValue = (int) ($this->amount * ($percent / 100));
+        $discountValue = (int)($this->amount * ($percent / 100));
         $this->amount = $this->amount - $discountValue;
         return $this;
     }
