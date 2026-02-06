@@ -117,7 +117,10 @@ class Money
 
     protected function evaluate(int|float|string|Money $value): int
     {
-        if ($value instanceof Money) $value = $value->toNumber();
+        $value = ($value instanceof Money)
+            ? $value->toNumber()
+            : Money::from($value)->toNumber();
+
         return (int)round($value * (10 ** $this->precision), 0);
     }
 
