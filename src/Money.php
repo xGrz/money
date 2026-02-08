@@ -109,8 +109,9 @@ class Money
         return $this;
     }
 
-    public function addPercent(int|float $percent): static
+    public function addPercent(null|int|float $percent): static
     {
+        if (is_null($percent)) return $this;
         $this->amount += round($this->amount / 100 * $percent);
         return $this;
     }
@@ -143,14 +144,16 @@ class Money
         return $this;
     }
 
-    public function subtractPercent(int|float $percent): static
+    public function subtractPercent(null|int|float $percent): static
     {
+        if (is_null($percent)) return $this;
         $this->amount = ($this->amount / (100 + $percent)) * 100;
         return $this;
     }
 
-    public function discount(int|float $percent): static
+    public function discount(null|int|float $percent): static
     {
+        if (is_null($percent)) return $this;
         $discountValue = (int)($this->amount * ($percent / 100));
         $this->amount = $this->amount - $discountValue;
         return $this;
