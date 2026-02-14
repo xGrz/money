@@ -120,7 +120,7 @@ class Money
     {
         $value = ($value instanceof Money)
             ? $value->toNumber()
-            : Money::from($value)->toNumber();
+            : Money::from($value, precision: $this->precision)->toNumber();
 
         return (int)round($value * (10 ** $this->precision), 0);
     }
@@ -140,14 +140,14 @@ class Money
     public function divide(int|float $by): static
     {
         if ($by == 0) return $this;
-        $this->amount = round($this->amount / $by, $this->precision);
+        $this->amount = round($this->amount / $by);
         return $this;
     }
 
     public function subtractPercent(null|int|float $percent): static
     {
         if (is_null($percent)) return $this;
-        $this->amount = ($this->amount / (100 + $percent)) * 100;
+        $this->amount = round(($this->amount / (100 + $percent)) * 100);
         return $this;
     }
 

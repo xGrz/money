@@ -76,6 +76,21 @@ class MoneyMathTest extends TestCase
         $this->assertEquals(30, $money);
     }
 
+
+    public function test_add_value_respects_custom_precision()
+    {
+        $money = money('1,234', precision: 3)->add(0.006)->toNumber();
+
+        $this->assertEquals(1.24, $money);
+    }
+
+    public function test_divide_preserves_internal_precision()
+    {
+        $money = money(100, precision: 3)->divide(3)->toNumber();
+
+        $this->assertEquals(33.333, $money);
+    }
+
     public function test_add_money_object()
     {
         $amountToAdd = money(10);
