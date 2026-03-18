@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php: [ 8.1, 8.2, 8.3, 8.4 ]
+        php: [ 8.1, 8.2, 8.3, 8.4, 8.5 ]
         laravel: [ 10.*, 11.*, 12.*, 13.* ]
         dependency-stability: [ prefer-stable ]
         exclude:
@@ -16,7 +16,8 @@ jobs:
           - laravel: 12.*
             php: 8.1
           - laravel: 13.*
-            php: 8.4
+            php: 8.1, 8.2
+
     name: Laravel ${{ matrix.laravel }}, PHP ${{ matrix.php }}
 
     steps:
