@@ -15,6 +15,8 @@ jobs:
             php: 8.1
           - laravel: 12.*
             php: 8.1
+          - laravel: 13.*
+            php: 8.4
     name: Laravel ${{ matrix.laravel }}, PHP ${{ matrix.php }}
 
     steps:
@@ -33,9 +35,12 @@ jobs:
         run: composer require "laravel/framework:${{ matrix.laravel }}" --no-interaction --no-update
 
       - name: Install orchestra/testbench v10 for Laravel 12 only
-        if: ${{ matrix.laravel == 12 }}
+        if: ${{ matrix.laravel == '12.*' }}
         run: composer require --dev "orchestra/testbench:^10.0"
 
+      - name: Install orchestra/testbench v11 for Laravel 13 only
+        if: ${{ matrix.laravel == '13.*' }}
+        run: composer require --dev "orchestra/testbench:^11.0"
       - name: Install dependencies
         run: composer update --${{ matrix.dependency-stability }} --prefer-dist --no-interaction --no-progress
 
