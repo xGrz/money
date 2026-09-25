@@ -223,9 +223,9 @@ class Money
         return $this->amount % 100 !== 0;
     }
 
-    public function getDecimalPart(): int
+    public function getDecimalPart(): string
     {
-        return (int)($this->amount % 100);
+        return str((string) ($this->amount % 100))->padLeft(2, '0');
     }
 
 }
