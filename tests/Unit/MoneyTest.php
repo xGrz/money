@@ -116,7 +116,9 @@ class MoneyTest extends TestCase
     public function test_get_decimal_part()
     {
         $money = money('123,45');
+        $money2 = money('12222,10');
         $this->assertEquals(45, $money->getDecimalPart());
+        $this->assertEquals(10, $money2->getDecimalPart());
     }
 
     public function test_has_decimal_part()
