@@ -213,4 +213,19 @@ class Money
         return $this->amount <= 0;
     }
 
+    public function getMainPart(): int
+    {
+        return (int)($this->amount / 100);
+    }
+
+    public function hasDecimalPart(): bool
+    {
+        return $this->amount % 100 !== 0;
+    }
+
+    public function getDecimalPart(): int
+    {
+        return (int)($this->amount % 100);
+    }
+
 }

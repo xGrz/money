@@ -2,7 +2,6 @@
 
 namespace XGrz\Money\Tests\Unit;
 
-
 use PHPUnit\Framework\TestCase;
 use XGrz\Money\Exceptions\MoneyValidationException;
 use XGrz\Money\Money;
@@ -87,14 +86,12 @@ class MoneyTest extends TestCase
         $this->assertEquals('1,00PLN', $money->format());
     }
 
-
     public function test_incorrect_amount_throws_exception()
     {
         $this->expectException(MoneyValidationException::class);
         $this->expectExceptionMessage('Amount [PLN200] is not a number');
         money('PLN 200');
     }
-
 
     public function test_convert_to_safe_database_integer()
     {
@@ -108,7 +105,29 @@ class MoneyTest extends TestCase
         $this->assertEquals(300, $money);
     }
 
+    public function test_get_main_part()
+    {
+        $money = money('123,45');
+        $money2 = money('12222,99');
+        $this->assertEquals(123, $money->getMainPart());
+        $this->assertEquals(12222, $money2->getMainPart());
+    }
 
+    public function test_get_decimal_part()
+    {
+        $money = money('123,45');
+        $this->assertEquals(45, $money->getDecimalPart());
+    }
 
+    public function test_has_decimal_part()
+    {
+        $money = money('123,45');
+        $money2 = money('12222,99');
+        $money3 = money('12222');
+
+        $this->assertTrue($money->hasDecimalPart());
+        $this->assertTrue($money2->hasDecimalPart());
+        $this->assertFalse($money3->hasDecimalPart());
+    }
 
 }
