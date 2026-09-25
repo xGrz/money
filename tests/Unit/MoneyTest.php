@@ -115,10 +115,24 @@ class MoneyTest extends TestCase
 
     public function test_get_decimal_part()
     {
-        $money = money('123,45');
-        $money2 = money('12222,01');
-        $this->assertEquals(45, $money->getDecimalPart());
-        $this->assertSame("01", $money2->getDecimalPart());
+        $money = money('123,45')->getDecimalPart();
+        $money2 = money('12222,01')->getDecimalPart();
+        $money3 = money('12222,10')->getDecimalPart();
+        $this->assertEquals(45, $money);
+        $this->assertSame("01", $money2);
+        $this->assertSame("10", $money3);
+    }
+
+    public function test_get_decimal_part_with_non_default_precision()
+    {
+        $money = money('123,450', precision: 3)->getDecimalPart();
+        $money2 = money('12222,010', precision: 3)->getDecimalPart();
+        $money3 = money('12222,10', precision: 3)->getDecimalPart();
+        $money4 = money('12222,001', precision: 3)->getDecimalPart();
+        $this->assertSame("450", $money);
+        $this->assertSame("010", $money2);
+        $this->assertSame("100", $money3);
+        $this->assertSame("001", $money4);
     }
 
     public function test_has_decimal_part()

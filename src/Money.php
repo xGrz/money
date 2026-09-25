@@ -215,17 +215,18 @@ class Money
 
     public function getMainPart(): int
     {
-        return (int)($this->amount / 100);
+        return (int)($this->amount / (10 ** $this->precision));
     }
 
     public function hasDecimalPart(): bool
     {
-        return $this->amount % 100 !== 0;
+        return $this->amount % (10 ** $this->precision) !== 0;
     }
 
     public function getDecimalPart(): string
     {
-        return str((string) ($this->amount % 100))->padLeft(2, '0');
+        $decimal = (string) ($this->amount % (10 ** $this->precision));
+        return str($decimal)->padLeft($this->precision, '0');
     }
 
 }
